@@ -1,0 +1,58 @@
+generated: '2026-09-13'
+method: searched
+source: https://www.agrodesign.co.jp/posts/58543323
+plan_count: 0
+plans: []
+summary: >-
+  AgroDesign Studios publishes no API plans, because it publishes no API. Its commercial surface
+  is contract research and physical goods, not metered software access, so there is nothing an
+  integrator can subscribe to. Recorded as an explicit zero rather than omitted.
+non_api_pricing:
+  model: contract-research-and-goods
+  note: >-
+    Captured for completeness only — these are laboratory service and product prices, NOT API
+    plans, and are deliberately excluded from plans[] and from plan_count.
+  service_tiers_named:
+  - AgroBox No.1
+  - AgroBox No.2
+  - AgroBox No.3
+  - AgroBox No.4
+  - AgroBox No.5
+  - AgroBox No.6
+  - AgroBox No.7
+  - AgroBox BoxSet
+  - AgroBox Pro Phase
+  - AgroBox Pro FBDD
+  price_table_format: PDF download (価格表) — per-tier prices are not published as page content
+  quote_based: true
+  published_prices:
+  - service: Fragment compound screening (フラグメント化合物スクリーニング受託解析)
+    price: 9,800,000 JPY
+    price_raw: 980万円（税別）
+    tax: excluded
+    includes: 320-compound commercial fragment library, crystallization through model building
+    qualifier: launch campaign, first-time-only introductory price (サービス開始キャンペーン / 初回限定)
+    source: https://www.agrodesign.co.jp/posts/58543323
+  - service: ESRF synchrotron X-ray diffraction measurement (commercial)
+    price: 198,000 JPY per Uni-Puck (16 crystals)
+    price_raw: 19.8万円（税別）
+    tax: excluded
+    source: https://www.agrodesign.co.jp/
+  - service: ESRF synchrotron X-ray diffraction measurement (academic rate)
+    price: 160,000 JPY per Uni-Puck
+    price_raw: 16万円（税別）
+    tax: excluded
+    audience: universities and public research institutions
+    source: https://www.agrodesign.co.jp/
+  storefront:
+    url: https://www.agrodesign.shop/
+    note: Per-product prices for lab robot arms, cultivation kits, seeds and consumables.
+x-evidence:
+  fetched: '2026-09-13'
+  urls:
+  - url: https://www.agrodesign.co.jp/
+    status: 200
+  - url: https://www.agrobox.jp/
+    status: 200
+  - url: https://www.agrodesign.shop/
+    status: 200

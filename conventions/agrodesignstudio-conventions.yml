@@ -1,0 +1,72 @@
+generated: '2026-09-13'
+method: derived
+source: mcp/agrodesignstudio-mcp.yml
+summary: >-
+  Derived from the probed MCP surface, which is the company's only machine-callable interface.
+  There is no first-party REST/GraphQL contract, so the usual pagination, expansion, versioning
+  and error-envelope conventions have no first-party expression. What follows records what the
+  Wix Site MCP surface actually guarantees an agent — which, on the two dimensions that matter
+  most before an agent acts, is nothing.
+transport:
+  protocol: JSON-RPC 2.0 over HTTPS POST
+  content_types: [application/json, text/event-stream]
+  endpoints:
+  - https://www.agrobox.jp/_api/mcp
+  - https://www.agrodesign.shop/_api/mcp
+auth_style:
+  style: anonymous
+  detail: >-
+    No credential is supplied by the caller. A server-minted visitor token from GenerateVisitorToken
+    is required before CallWixSiteAPI or ExecuteWixAPI. See authentication/agrodesignstudio-authentication.yml.
+idempotency:
+  coverage: none
+  supported: false
+  header: null
+  scope: []
+  note: >-
+    No idempotency key, request-id, or replay-protection mechanism is documented or advertised on
+    either endpoint. Two of the nine tools mutate state — CallWixSiteAPI (documented as able to
+    "start a purchase" and "book an appointment") and ExecuteWixAPI (destructiveHint=true) — and
+    neither exposes a caller-supplied deduplication key. An agent that retries a timed-out call
+    has no protection against double-firing. No Idempotency pointer is emitted in apis.yml,
+    because the mechanism does not exist.
+reversibility:
+  state: none
+  grade: null
+  note: >-
+    No reversal, cancel, refund, void or restore operation is exposed by the MCP tool set, and no
+    window is stated anywhere. The mutating surface is generic (CallWixSiteAPI targets arbitrary
+    Wix platform endpoints), so whatever reversal semantics exist belong to the specific Wix API
+    an agent happens to call and are not discoverable from this provider's own surface. NOT `na`:
+    a write surface genuinely exists — a purchase can be started on the AgroDesign.SHOP
+    storefront — it simply has no documented way back. No window is asserted here because none is
+    published, and inventing one could cost a buyer real money.
+  write_surface_present: true
+  reversal_operations: []
+dry_run_mode:
+  supported: false
+  note: No rehearsal, preview, or validate-only mode is exposed by any tool.
+pagination:
+  style: not-applicable
+  note: No first-party collection endpoint is published. SearchInSite takes only a searchTerm and
+    exposes no cursor, offset, or limit parameter.
+versioning:
+  style: protocol-version-negotiation
+  detail: >-
+    The MCP server negotiates protocolVersion on initialize and answered '2025-06-18'. There is no
+    product API version, no version header, and no dated release channel for the company's own
+    surface.
+error_envelope:
+  style: json-rpc-error
+  detail: Errors follow the JSON-RPC 2.0 error object. No RFC 9457 problem+json surface exists.
+rate_limit_signaling:
+  documented: false
+  note: See rate-limits/agrodesignstudio-rate-limits.yml — no limits and no response headers are published.
+tracing:
+  request_id: false
+  note: No request-id or correlation header is documented.
+cross_links:
+  authentication: authentication/agrodesignstudio-authentication.yml
+  conformance: conformance/agrodesignstudio-conformance.yml
+  rate_limits: rate-limits/agrodesignstudio-rate-limits.yml
+  mcp: mcp/agrodesignstudio-mcp.yml

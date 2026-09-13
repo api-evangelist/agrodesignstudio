@@ -1,0 +1,64 @@
+# AgroBox アグロデザイン・スタジオ
+> 该网站提供结构生物学服务，重点是X射线晶体学，以支持药物发现和农用化学品开发。他们提供名为AgroBox®的打包服务，涵盖从样品准备到数据分析和结构建模的整个过程。该公司还专注于核酸结构分析，并提供专门的服务来解决核酸结构预测和解析的挑战。此外，他们还提供结构基础药物设计（SBDD）服务，包括高通量筛选和片段筛选，以加速新药和农用化学品的发现。
+
+## Homepage link
+- [home](https://www.agrobox.jp/)
+
+## AI 專員存取權
+
+此網站由 Wix 提供技術支援，並支援 Model Context Protocol (MCP)，
+以進行代理式 AI 存取。AI 專員可以直接連結，以擷取即時、
+最新的網站內容，無需進行抓取。\n- [**網站 MCP 端點**](https://www.agrobox.jp/_api/mcp)
+- [**Wix MCP Docs**](https://dev.wix.com/docs/develop-websites/articles/get-started/about-the-wix-site-mcp)
+
+## 可用 MCP 工具
+
+### GetBusinessDetails
+擷取商家和網站詳細資訊，例如時區、電子郵件、電話和地址。
+- 無需任何參數。
+
+### SearchInSite
+搜尋網站，以取得資訊。
+- **searchTerm** - 要在網站中搜尋的字詞。
+
+### SearchSiteApiDocs
+擷取適用於此網站上安裝之 Wix 商家解決方案的 API 文件，
+並通知 AI 用戶端如何使用這些 API。使用此工具
+查詢產品和服務（而不是 SearchInSite）。- **searchTerm** - 要在網站 API 文件中搜尋的字詞。
+
+### GenerateVisitorToken
+建立新的訪客造訪次數，並取得網站的訪客存取權杖。如果內容中沒有可用的訪客權杖，
+必須在發出任何 CallWixSiteAPI 請求之前呼叫。
+- 無需任何參數。
+
+### CallWixSiteAPI
+呼叫網站上的 API 方法，以代表訪客執行操作，
+例如查詢網站資料、預訂約會或開始採購。
+- **visitorToken** - 訪客存取權杖。如果無法使用，請先使用 GenerateVisitorToken。
+- **url** - 要呼叫之 API 方法的絕對網址（例如：https://www.wixapis.com/...)。使用 SearchSiteApiDocs 擷取。
+- **method** - 用於 API 呼叫的 HTTP 方法。
+- **body** - 做為有效 JSON 字串的請求主體。
+
+### ReadFullDocsArticle
+從 Wix 開發人員文件入口網站擷取完整文章。
+- **articleUrl** - Wix 開發人員文件入口網站中的文章網址。
+
+### ReadFullDocsMethodSchema
+擷取 Wix API 方法的完整結構描述。應在透過 CallWixSiteAPI 呼叫
+實際方法之前呼叫。
+- **articleUrl** - Wix API 方法的參照文章網址。
+
+## 訪客可透過 AI + MCP 執行哪些操作
+
+- 取得商家詳細資訊（聯絡資訊、地點、營業時間）
+- 探索提供的產品和服務
+- 預訂服務與訂位
+- 開始採購並由系統導向至網站以完成結帳
+- 提出問題並取得相關答案，無需瀏覽網站
+
+## 備註
+
+- 連結至 MCP 端點無需驗證
+- 僅限可在網站上存取的公開資訊才可供使用
+- 內容一律為即時且為最新狀態
+- 若要接收工具更新，請在收到工具更新通知時實作 tools/list 呼叫

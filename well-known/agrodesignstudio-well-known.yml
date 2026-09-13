@@ -1,0 +1,101 @@
+generated: '2026-09-13'
+method: probed
+source: direct HTTPS probe of every host in apis.yml (registrable domain + www, both Wix site hosts, and
+  the MCP endpoint hosts)
+summary: No /.well-known discovery document is served on any AgroDesign Studios host. Recorded as an absence
+  — no WellKnown or SecurityTxt pointer is emitted in apis.yml, because every probe missed.
+result: none
+hosts:
+- host: www.agrodesign.co.jp
+  note: Corporate site. Every /.well-known/* path returns HTTP 404 with the site's Japanese HTML 404 shell
+    — an HTML body is not a document.
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+    file: null
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+  - path: /.well-known/agent.json
+    status: 404
+    file: null
+  - path: /.well-known/aauth-resource.json
+    status: 404
+    file: null
+- host: www.agrobox.jp
+  note: Wix-hosted AgroBox service site. The Wix edge rejects every /.well-known/* path with HTTP 400
+    before it reaches the site, so no discovery document can be served from this host at all.
+  documents:
+  - path: /.well-known/security.txt
+    status: 400
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 400
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 400
+    file: null
+  - path: /.well-known/oauth-protected-resource
+    status: 400
+    file: null
+  - path: /.well-known/api-catalog
+    status: 400
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 400
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 400
+    file: null
+  - path: /.well-known/agent.json
+    status: 400
+    file: null
+  - path: /.well-known/aauth-resource.json
+    status: 400
+    file: null
+- host: www.agrodesign.shop
+  note: Wix-hosted AgroDesign.SHOP storefront. Same Wix edge behaviour — HTTP 400 on every /.well-known/*
+    path.
+  documents:
+  - path: /.well-known/security.txt
+    status: 400
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 400
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 400
+    file: null
+  - path: /.well-known/oauth-protected-resource
+    status: 400
+    file: null
+  - path: /.well-known/api-catalog
+    status: 400
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 400
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 400
+    file: null
+  - path: /.well-known/agent.json
+    status: 400
+    file: null
+  - path: /.well-known/aauth-resource.json
+    status: 400
+    file: null

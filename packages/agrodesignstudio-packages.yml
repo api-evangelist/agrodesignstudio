@@ -1,0 +1,54 @@
+generated: '2026-09-13'
+method: searched
+source: >-
+  registry.npmjs.org, pypi.org, rubygems.org, crates.io and the GitHub search API, queried
+  2026-09-13 for "agrodesign" and "agrobox"
+package_count: 0
+packages: []
+official_sdk_count: 0
+summary: >-
+  AgroDesign Studios publishes no client libraries. No first-party package exists on npm, PyPI,
+  RubyGems, crates.io, Maven Central, NuGet or pkg.go.dev, and no SDK, CLI or code sample is
+  offered anywhere on its sites. No SDKs pointer is emitted in apis.yml.
+registry_probes:
+- registry: npm
+  query: agrobox
+  results: 0
+- registry: npm
+  query: agrodesign
+  results: 0
+- registry: pypi
+  package: agrobox
+  status: 404
+- registry: rubygems
+  package: agrobox
+  status: 404
+- registry: rubygems
+  package: agrodesign
+  status: 404
+- registry: crates.io
+  package: agrobox
+  status: 404
+- registry: crates.io
+  package: agrodesign
+  status: 404
+rejected_on_ownership:
+- name: agrodesign
+  registry: pypi
+  url: https://pypi.org/project/agrodesign/
+  version: 0.7.0
+  published: null
+  reason: >-
+    Name collision only. PyPI "agrodesign" is "Automatic statistical and agronomic interpretation
+    of agricultural experiments" by author Akib Mir, Apache-2.0, with no link to
+    agrodesign.co.jp or 株式会社アグロデザイン・スタジオ. It is an unrelated agronomy statistics
+    library and is NOT recorded as a package of this company.
+- name: Agrobox-backend
+  registry: github
+  url: https://github.com/Agrobox-backend
+  reason: >-
+    A GitHub organization account named Agrobox-backend exists (created 2021-09-29) but publishes
+    ZERO public repositories, carries no name, blog, email, location or bio, and states no
+    affiliation with AgroDesign Studios. There is no evidence tying it to this company, so no
+    GitHubOrganization pointer is emitted. All 23 GitHub repositories matching "agrodesign" or
+    "agrobox" belong to unrelated third parties, mostly Spanish-language agriculture projects.

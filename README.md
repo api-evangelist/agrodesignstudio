@@ -1,4 +1,4 @@
-# Agrodesignstudio
+# AgroDesign Studios
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,5 +64,39 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Agrodesignstudio is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://equityzen.com/company/agrodesignstudio
+**AgroDesign Studios** (株式会社アグロデザイン・スタジオ) is a Japanese structural-biology startup founded
+30 March 2018 by CEO Yuki Nishigaya, based at the University of Tokyo Kashiwa-II campus in Kashiwa,
+Chiba. It applies protein and nucleic-acid 3D structure information to the discovery of
+molecular-targeted, environmentally safer crop-protection chemicals.
+
+Its commercial surface is **contract research and physical goods, not software**. The **AgroBox®**
+brand sells X-ray crystallography, cryo-EM, fragment screening and structure-based drug design
+(SBDD) engagements; **AgroDesign.SHOP** sells lab-automation robot arms (as a UFACTORY xArm
+authorized reseller), Arabidopsis cultivation kits, seeds and experimental materials.
+
+### What this profile found
+
+- **No first-party API contract.** No OpenAPI, GraphQL SDL, AsyncAPI, gRPC or WSDL was found on any
+  host the company controls, after probing the corporate site, both Wix-hosted service sites, and
+  every API host root.
+- **Two live, unauthenticated remote MCP endpoints** — `https://www.agrobox.jp/_api/mcp` and
+  `https://www.agrodesign.shop/_api/mcp`. Both answered `initialize` and `tools/list` with HTTP 200
+  and returned 9 tools each. These are **Wix "Site Visitor Assistant" servers — platform-authored by
+  the Wix site builder, not written by AgroDesign Studios.** They are real agent surfaces on hosts
+  the company controls, but they describe the *website*, not the science service.
+- **Two verbatim `llms.txt` files**, also Wix-generated, saved under `llms/`.
+- **No `/.well-known` document of any kind.** The Wix edge returns HTTP 400 for every
+  `/.well-known/*` path on both Wix hosts; the corporate site returns 404. No agent card, no
+  `security.txt`, no OAuth metadata.
+- **No packages.** PyPI `agrodesign` and the GitHub org `Agrobox-backend` were both examined and
+  **rejected on ownership** — see `packages/agrodesignstudio-packages.yml`.
+- **No idempotency and no reversibility** on a surface that can start a purchase — see
+  `conventions/agrodesignstudio-conventions.yml`.
+
+### Links
+
+- Company: https://www.agrodesign.co.jp/
+- AgroBox service site: https://www.agrobox.jp/
+- AgroDesign.SHOP: https://www.agrodesign.shop/
+- LinkedIn: https://jp.linkedin.com/company/agrodesignstudios
+- Secondary-market listing (harvest source): https://equityzen.com/company/agrodesignstudio

@@ -1,0 +1,141 @@
+generated: '2026-09-13'
+method: probed
+source: https://www.agrobox.jp/_api/mcp
+name: AgroDesign Studios — Site MCP servers
+description: >-
+  Two live, unauthenticated remote MCP endpoints served from hosts AgroDesign Studios
+  (株式会社アグロデザイン・スタジオ) controls: the AgroBox structural-biology service site and the
+  AgroDesign.SHOP lab-equipment store. Both are Wix "Site Visitor Assistant" servers —
+  the MCP surface is PLATFORM-AUTHORED by the Wix site builder, not written by
+  AgroDesign Studios, and it exposes the generic Wix site/commerce toolset rather than
+  any contract specific to the company's protein-structure-analysis business. It is
+  recorded here because it is a real agent surface reachable at the company's own
+  hostnames, but it must not be read as a first-party API.
+
+deployment:
+  mode: remote
+  endpoint: https://www.agrobox.jp/_api/mcp
+  auth: none
+  verified: probed
+
+platform_authored: true
+platform: Wix Site MCP
+platform_docs: https://dev.wix.com/docs/develop-websites/articles/get-started/about-the-wix-site-mcp
+
+servers:
+  - name: AgroBox アグロデザイン・スタジオ
+    endpoint: https://www.agrobox.jp/_api/mcp
+    server_info_name: 'Site Visitor Assistant for site "AgroBox アグロデザイン・スタジオ" (https://www.agrobox.jp/_api/mcp)'
+    server_info_version: 1.0.0
+    protocol_version: '2025-06-18'
+    auth: none
+    tool_count: 9
+    tools_file: mcp/agrodesignstudio-agrobox-mcp-tools.json
+    advertised_in: https://www.agrobox.jp/llms.txt
+    x-evidence:
+      fetched: '2026-09-13'
+      url: https://www.agrobox.jp/_api/mcp
+      method: 'POST jsonrpc tools/list + initialize'
+      http_status: 200
+  - name: AgroDesign.SHOP
+    endpoint: https://www.agrodesign.shop/_api/mcp
+    server_info_name: 'Site Visitor Assistant for site "AgroDesign.SHOP" (https://www.agrodesign.shop/_api/mcp)'
+    server_info_version: 1.0.0
+    protocol_version: '2025-06-18'
+    auth: none
+    tool_count: 9
+    tools_file: mcp/agrodesignstudio-shop-mcp-tools.json
+    advertised_in: https://www.agrodesign.shop/llms.txt
+    x-evidence:
+      fetched: '2026-09-13'
+      url: https://www.agrodesign.shop/_api/mcp
+      method: 'POST jsonrpc tools/list + initialize'
+      http_status: 200
+
+capabilities:
+  tools:
+    listChanged: true
+  logging: {}
+  resources: false
+  prompts: false
+
+tools:
+  - name: GetBusinessDetails
+    category: business-profile
+    parameters: []
+    read_only: true
+    description: Retrieve business and site details — timezone, email, phone, address.
+  - name: SearchInSite
+    category: content-search
+    parameters: [searchTerm]
+    read_only: true
+    description: Full-text search across the public site content.
+  - name: SearchSiteApiDocs
+    category: docs-search
+    parameters: [searchTerm]
+    read_only: true
+    description: >-
+      Retrieve API documentation for the Wix business solutions installed on this site,
+      so a client knows how to call them. Used to query products and services.
+  - name: GenerateVisitorToken
+    category: auth
+    parameters: []
+    read_only: false
+    description: >-
+      Create a new visitor session and obtain a site visitor access token. Must be called
+      before any CallWixSiteAPI request. No credentials required — anonymous visitor scope.
+  - name: CallWixSiteAPI
+    category: site-api-invoke
+    parameters: [visitorToken, url, method, body]
+    read_only: false
+    description: >-
+      Call an API method on the site on behalf of the visitor — query site data, book an
+      appointment, or start a purchase. Target URLs are Wix platform endpoints
+      (https://www.wixapis.com/...), not AgroDesign-authored endpoints.
+  - name: ExecuteWixAPI
+    category: site-api-invoke
+    parameters: [code, reason, hasMutations, sourceDocUrls, visitorToken]
+    read_only: false
+    destructive: true
+    description: >-
+      Execute code against the Wix API. Declared readOnlyHint=false and
+      destructiveHint=true in the server's own tool annotations.
+  - name: BrowseWixRESTDocsMenu
+    category: docs-search
+    parameters: [menuUrl, reason]
+    read_only: true
+    description: Browse the Wix REST documentation menu tree.
+  - name: ReadFullDocsArticle
+    category: docs-search
+    parameters: [articleUrl]
+    read_only: true
+    description: Fetch a full article from the Wix developer documentation portal.
+  - name: ReadFullDocsMethodSchema
+    category: docs-search
+    parameters: [articleUrl, reason]
+    read_only: true
+    description: Fetch the full request/response schema for a Wix API method.
+
+findings:
+  - >-
+    The MCP endpoints are anonymous — no OAuth challenge, no API key. /llms.txt on both
+    hosts states plainly that "connecting to the MCP endpoint requires no authentication"
+    and that only publicly accessible site information is exposed.
+  - >-
+    No /.well-known/oauth-authorization-server or /.well-known/oauth-protected-resource
+    is served: the Wix edge answers HTTP 400 for every /.well-known/* path on both hosts.
+  - >-
+    Two of the nine tools are mutating. ExecuteWixAPI carries destructiveHint=true in the
+    server's own annotations, and CallWixSiteAPI can start a purchase on the storefront.
+    Neither surface documents an idempotency key or a reversal operation.
+  - >-
+    SECURITY NOTE — the tool DESCRIPTIONS returned by tools/list embed a large
+    <agent-mandatory-instructions> block addressed at the calling agent ("YOU MUST READ
+    AND FOLLOW ... A FAILURE TO DO SO WILL RESULT IN ERRORS AND CRITICAL ISSUES"). This is
+    Wix platform boilerplate present on every Wix Site MCP, not something AgroDesign
+    Studios wrote, but it is instruction-shaped text arriving inside a data channel and
+    was treated as data during this probe.
+  - >-
+    No first-party OpenAPI, GraphQL, AsyncAPI, gRPC or WSDL contract was found on any
+    AgroDesign-controlled host. The MCP surface is the company's only machine-callable
+    agent surface, and it describes the website, not the science service.

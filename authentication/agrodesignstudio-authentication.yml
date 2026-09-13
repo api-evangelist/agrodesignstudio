@@ -1,0 +1,55 @@
+generated: '2026-09-13'
+method: probed
+source: https://www.agrobox.jp/_api/mcp
+docs: https://www.agrobox.jp/llms.txt
+summary: >-
+  AgroDesign Studios publishes no first-party API and therefore no API credential of any kind —
+  no API key, no OAuth client registration, no developer account. The only machine-callable
+  surface is the Wix platform Site MCP endpoint on each of its two Wix-hosted sites, and that
+  surface is ANONYMOUS: no authentication is required to connect, and the only token involved is
+  a visitor-scoped session token the server itself mints on request.
+schemes:
+- name: none
+  type: none
+  applies_to:
+  - https://www.agrobox.jp/_api/mcp
+  - https://www.agrodesign.shop/_api/mcp
+  description: >-
+    The MCP endpoints accept an unauthenticated JSON-RPC POST. initialize and tools/list both
+    returned HTTP 200 with no WWW-Authenticate challenge and no invalid_token error. Both
+    /llms.txt files state it explicitly: "connecting to the MCP endpoint requires no
+    authentication" / "MCP エンドポイントへの接続に認証は不要です".
+  x-evidence:
+    fetched: '2026-09-13'
+    url: https://www.agrobox.jp/_api/mcp
+    http_status: 200
+- name: visitor-token
+  type: session-token
+  applies_to:
+  - https://www.agrobox.jp/_api/mcp
+  - https://www.agrodesign.shop/_api/mcp
+  description: >-
+    The GenerateVisitorToken tool takes no parameters and returns a site visitor access token
+    that must be passed to CallWixSiteAPI and ExecuteWixAPI. This is a server-minted anonymous
+    session identifier, not a credential the caller supplies or an account the caller holds — it
+    carries public-visitor scope only.
+  issued_by: Wix Site MCP server
+  caller_supplied: false
+oauth:
+  supported: false
+  discovery_probed: true
+  note: >-
+    /.well-known/oauth-authorization-server and /.well-known/oauth-protected-resource were probed
+    on all three company hosts. The Wix edge answers HTTP 400 for every /.well-known/* path on
+    the two Wix hosts, and the corporate site answers HTTP 404. No OAuth metadata is published.
+scope_model:
+  present: false
+  note: >-
+    No OAuth scope surface exists, so no scopes/ artifact is emitted. Authorization is binary and
+    implicit — the server exposes only what an anonymous visitor can already reach on the public
+    website.
+exposure:
+  note: >-
+    Because the endpoint is anonymous, the practical access-control boundary is whatever the Wix
+    visitor-token scope permits. Both /llms.txt files assert that only publicly accessible site
+    information is available through it.

@@ -1,0 +1,64 @@
+generated: '2026-09-13'
+method: probed
+source: https://www.agrobox.jp/_api/mcp
+summary: >-
+  The only standard AgroDesign Studios' surface demonstrably conforms to is the Model Context
+  Protocol, and that conformance is inherited from the Wix site platform rather than implemented
+  by the company. No OAuth2, OIDC, or REST-convention conformance could be established because no
+  first-party contract exists. The company operates in agricultural chemistry and structural
+  biology — a market whose domain data standards (PDB/mmCIF, InChI, SMILES, OECD pesticide data
+  submission formats) are laboratory and regulatory data formats, and none of them are declared by
+  any published contract, so no domain_standard_conformance is asserted.
+conformance:
+- id: mcp
+  name: Model Context Protocol
+  version: '2025-06-18'
+  conforms: true
+  evidence: >-
+    POST https://www.agrobox.jp/_api/mcp with method=initialize returned HTTP 200 and
+    {"result":{"protocolVersion":"2025-06-18","capabilities":{"tools":{"listChanged":true},
+    "logging":{}},"serverInfo":{"name":"Site Visitor Assistant for site \"AgroBox
+    アグロデザイン・スタジオ\"","version":"1.0.0"}}}. tools/list returned 9 tools each carrying a
+    JSON Schema draft-07 inputSchema.
+  implemented_by: Wix Site MCP platform
+  first_party: false
+- id: json-rpc-2.0
+  name: JSON-RPC 2.0
+  conforms: true
+  evidence: >-
+    Both endpoints accept and return well-formed JSON-RPC 2.0 envelopes ("jsonrpc":"2.0" with
+    matching id) on initialize and tools/list.
+- id: json-schema-draft-07
+  name: JSON Schema draft-07
+  conforms: true
+  evidence: >-
+    Every tool inputSchema in the tools/list response declares
+    "$schema":"http://json-schema.org/draft-07/schema#".
+- id: mcp-tool-annotations
+  name: MCP tool annotations (readOnlyHint / destructiveHint)
+  conforms: partial
+  evidence: >-
+    4 of 9 tools carry annotations; ExecuteWixAPI correctly declares readOnlyHint=false and
+    destructiveHint=true. The remaining 5 tools — including the mutating CallWixSiteAPI and
+    GenerateVisitorToken — carry no annotations at all, so an agent cannot tell from the manifest
+    that CallWixSiteAPI can start a purchase.
+- id: oauth2
+  name: OAuth 2.0
+  conforms: false
+  evidence: >-
+    No authorization server metadata is published; /.well-known/oauth-authorization-server
+    returns HTTP 400 on both Wix hosts and 404 on www.agrodesign.co.jp. The MCP endpoints are
+    anonymous.
+- id: rfc9457
+  name: 'RFC 9457: Problem Details for HTTP APIs'
+  conforms: false
+  evidence: No HTTP API is published, so no problem+json error envelope exists to assess.
+- id: rfc9116
+  name: 'RFC 9116: security.txt'
+  conforms: false
+  evidence: /.well-known/security.txt returns HTTP 400 (Wix hosts) / 404 (corporate site).
+compliance:
+  certifications_published: false
+  note: >-
+    No trust center, SOC 2, ISO 27001, or other named certification was found on any company
+    host. No Compliance pointer is emitted.

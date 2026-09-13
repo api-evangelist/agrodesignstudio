@@ -1,0 +1,23 @@
+generated: '2026-09-13'
+method: searched
+source: https://www.agrobox.jp/llms.txt
+limit_count: 0
+rate_limits: []
+summary: >-
+  No rate limits are published for either MCP endpoint. Neither /llms.txt documents a quota, and
+  neither the initialize nor the tools/list response carried any rate-limit response header. The
+  endpoints are anonymous, so there is no per-key or per-account scope to attach a limit to; any
+  throttling in effect is Wix platform edge behaviour that the company neither states nor controls.
+response_headers:
+  observed: []
+  note: >-
+    Probed 2026-09-13 on POST https://www.agrobox.jp/_api/mcp — no X-RateLimit-*, RateLimit-*, or
+    Retry-After header was returned on a successful (200) response.
+exhaustion_status_code: null
+x-evidence:
+  fetched: '2026-09-13'
+  urls:
+  - url: https://www.agrobox.jp/_api/mcp
+    status: 200
+  - url: https://www.agrobox.jp/llms.txt
+    status: 200
