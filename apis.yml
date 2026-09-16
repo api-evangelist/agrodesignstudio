@@ -66,6 +66,10 @@ apis:
   baseURL: https://www.agrodesign.shop/_api/mcp
   tags:
   - MCP
+  - E-Commerce
+  - Laboratory Automation
+  tags_raw:
+  - MCP
   - eCommerce
   - Laboratory Automation
   properties:
