@@ -54,6 +54,9 @@ apis:
     url: mcp/agrodesignstudio-mcp.yml
   - type: LLMsTxt
     url: llms/agrodesignstudio-llms.txt
+  x-surface: platform-generated
+  x-platform: wix
+  x-platform-surface: site-mcp
 - name: AgroDesign.SHOP Site MCP
   description: >-
     The second live, unauthenticated remote MCP endpoint, served at the AgroDesign.SHOP
@@ -77,6 +80,9 @@ apis:
     url: mcp/agrodesignstudio-mcp.yml
   - type: LLMsTxt
     url: llms/agrodesignstudio-shop-llms.txt
+  x-surface: platform-generated
+  x-platform: wix
+  x-platform-surface: site-mcp
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
