@@ -64,39 +64,109 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-**AgroDesign Studios** (株式会社アグロデザイン・スタジオ) is a Japanese structural-biology startup founded
-30 March 2018 by CEO Yuki Nishigaya, based at the University of Tokyo Kashiwa-II campus in Kashiwa,
-Chiba. It applies protein and nucleic-acid 3D structure information to the discovery of
-molecular-targeted, environmentally safer crop-protection chemicals.
+AgroDesign Studios (株式会社アグロデザイン・スタジオ) is a Japanese structural-biology startup founded 30 March 2018 by CEO Yuki Nishigaya, based in the University of Tokyo Kashiwa-II campus industry-academia building in Kashiwa, Chiba. It applies protein and nucleic-acid 3D structure information to the discovery of molecular-targeted, environmentally safer crop-protection chemicals. Its commercial surface is contract research rather than software: the AgroBox® service brand sells X-ray crystallography, cryo-EM, fragment screening and structure-based drug design (SBDD) engagements, and AgroDesign.SHOP sells lab-automation robots, cultivation kits and experimental materials. The company publishes no first-party API, SDK or developer program; its only machine-callable agent surface is the Wix platform Site MCP endpoint served on each of its two Wix-hosted sites.
 
-Its commercial surface is **contract research and physical goods, not software**. The **AgroBox®**
-brand sells X-ray crystallography, cryo-EM, fragment screening and structure-based drug design
-(SBDD) engagements; **AgroDesign.SHOP** sells lab-automation robot arms (as a UFACTORY xArm
-authorized reseller), Arabidopsis cultivation kits, seeds and experimental materials.
+**Areas:** Agriculture · AgTech · Biotechnology · Life Sciences · Structural Biology · Drug Discovery · Crop Protection · Contract Research · Laboratory Automation · Japan · MCP · Company
 
-### What this profile found
+## AgroDesign Studios on APIs.io
 
-- **No first-party API contract.** No OpenAPI, GraphQL SDL, AsyncAPI, gRPC or WSDL was found on any
-  host the company controls, after probing the corporate site, both Wix-hosted service sites, and
-  every API host root.
-- **Two live, unauthenticated remote MCP endpoints** — `https://www.agrobox.jp/_api/mcp` and
-  `https://www.agrodesign.shop/_api/mcp`. Both answered `initialize` and `tools/list` with HTTP 200
-  and returned 9 tools each. These are **Wix "Site Visitor Assistant" servers — platform-authored by
-  the Wix site builder, not written by AgroDesign Studios.** They are real agent surfaces on hosts
-  the company controls, but they describe the *website*, not the science service.
-- **Two verbatim `llms.txt` files**, also Wix-generated, saved under `llms/`.
-- **No `/.well-known` document of any kind.** The Wix edge returns HTTP 400 for every
-  `/.well-known/*` path on both Wix hosts; the corporate site returns 404. No agent card, no
-  `security.txt`, no OAuth metadata.
-- **No packages.** PyPI `agrodesign` and the GitHub org `Agrobox-backend` were both examined and
-  **rejected on ownership** — see `packages/agrodesignstudio-packages.yml`.
-- **No idempotency and no reversibility** on a surface that can start a purchase — see
-  `conventions/agrodesignstudio-conventions.yml`.
+Everything profiled for AgroDesign Studios is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/agrodesignstudio/](https://apis.io/providers/agrodesignstudio/)** — or go straight to one of the APIs or properties below.
 
-### Links
+### APIs (2)
 
-- Company: https://www.agrodesign.co.jp/
-- AgroBox service site: https://www.agrobox.jp/
-- AgroDesign.SHOP: https://www.agrodesign.shop/
-- LinkedIn: https://jp.linkedin.com/company/agrodesignstudios
-- Secondary-market listing (harvest source): https://equityzen.com/company/agrodesignstudio
+- [AgroBox Site MCP](https://apis.io/apis/agrodesignstudio/agrobox-site-mcp/) — A live, unauthenticated remote Model Context Protocol endpoint served at the AgroBox structural-biology service site. The server is the Wix "Site Visitor…
+- [AgroDesign.SHOP Site MCP](https://apis.io/apis/agrodesignstudio/agrodesignshop-site-mcp/) — The second live, unauthenticated remote MCP endpoint, served at the AgroDesign.SHOP storefront where the company sells lab-automation robot arms (as a…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [AgroDesign Studios — Site MCP servers](https://apis.io/servers/agrodesignstudio/agrodesign-studios-site-mcp-servers/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Agrodesignstudio Authentication](https://apis.io/security/agrodesignstudio/agrodesignstudio-authentication/)
+- [Agrodesignstudio Domain Security](https://apis.io/security/agrodesignstudio/agrodesignstudio-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Agrodesignstudio Plans Pricing](https://apis.io/plans/agrodesignstudio/agrodesignstudio-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Agrodesignstudio Rate Limits](https://apis.io/rate-limits/agrodesignstudio/agrodesignstudio-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.agrodesign.co.jp/)
+- [Support](https://www.agrobox.jp/contact)
+- [Blog](https://www.agrodesign.co.jp/pages/2231598/blog)
+- [Terms of service](https://www.agrobox.jp/tokusyohou)
+- [Privacy policy](https://www.agrobox.jp/privacypolicy)
+
+## API Evangelist rating
+
+**Kin Score 18.8** — emerging · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 75.0 |
+| Contract quality | 0.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 0.0 |
+| Developer ergonomics | 19.0 |
+| Access clarity | 21.1 |
+
+**Agent readiness 7.2** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | platform (partial credit) |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 19.5** — Health
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/agrodesignstudio/](https://apis.io/providers/agrodesignstudio/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for AgroDesign Studios: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/agrodesignstudio/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
